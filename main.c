@@ -9,6 +9,34 @@ GPIO_Type* GPIOD = (GPIO_Type*)0x40020C00;
 USART_Type* USART1 = (USART_Type*)0x40011000;
 USART_Type* USART6 = (USART_Type*)0x40011400;
 
+// Автогенерация таблицы при инициализации
+uint16_t crc_table[256];
+uint8_t table_generated = 0;
+
+void init_crc_table(void) {
+    if(!table_generated) {
+        for(uint16_t i = 0; i < 256; i++) {
+            uint16_t crc = i;
+            for(uint8_t j = 0; j < 8; j++) {
+                crc = (crc & 0x0001) ? (crc >> 1) ^ 0xA001 : crc >> 1;
+            }
+            crc_table[i] = crc;
+        }
+        table_generated = 1;
+    }
+}
+
+uint16_t calculate_crc_modbus_fast(const uint8_t *data, uint16_t length) {
+    uint16_t crc = 0xFFFF;
+    
+    for(uint16_t i = 0; i < length; i++) {
+        uint8_t index = (crc ^ data[i]) & 0xFF;
+        crc = (crc >> 8) ^ crc_table[index];
+    }
+    
+    return crc;
+}
+
 // Функция отправки символа через USART1
 void uart1_send_char(int c)
 { 
@@ -59,7 +87,7 @@ void send_modbus_write_register(uint8_t address, uint16_t register_addr, uint16_
     message[5] = value & 0xFF;                 // Младший байт значения
     
     // Рассчитываем CRC
-    crc = calculate_crc_modbus(message, 6);
+    crc = calculate_crc_modbus_fast(message, 6);
     
     // Добавляем CRC (младший байт первый)
     message[6] = crc & 0xFF;
@@ -95,7 +123,7 @@ void send_modbus_read_registers(uint8_t address, uint16_t start_addr, uint16_t c
     message[5] = count & 0xFF;              // Младший байт количества
     
     // Рассчитываем CRC
-    crc = calculate_crc_modbus(message, 6);
+    crc = calculate_crc_modbus_fast(message, 6);
     
     // Добавляем CRC (младший байт первый)
     message[6] = crc & 0xFF;
@@ -172,6 +200,8 @@ void SystemInit(void)
 
 int main(void)
 {
+    init_crc_table();
+  
     SystemInit();
 
     // Включение тактирования
@@ -238,7 +268,7 @@ int main(void)
         send_modbus_write_register(0x01, 0x0010, 0x0002);
         GPIOD->x_ODR.ODR12 = 0; // Выключить зеленый
         
-        for(volatile int k = 0; k < 100000; ++k); // Задержка
+        //for(volatile int k = 0; k < 100000; ++k); // Задержка
         
         // 2. Чтение значения из регистра 0x10
         GPIOD->x_ODR.ODR13 = 1; // Оранжевый - чтение активно
@@ -263,6 +293,6 @@ int main(void)
             GPIOD->x_ODR.ODR14 = 0; // Выключить красный при ошибке
         }
         
-        for(volatile int k = 0; k < 1000000; ++k); // Задержка перед следующей итерацией
+        //for(volatile int k = 0; k < 1000000; ++k); // Задержка перед следующей итерацией
     }
 }

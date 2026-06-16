@@ -1,4 +1,4 @@
-"D:\Работа\Диод\UART1 Modbus RX TX — копия\main.c"
+"D:\Работа\Диод\UART1 Modbus RX TX с индикатором и таблицей\main.c"
 -std=c99
 -ferror-limit=100
 -I

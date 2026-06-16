@@ -1,5 +1,5 @@
 [DebugChecksum]
-Checksum=-1446834961
+Checksum=-441552159
 [CodeCoverage]
 Enabled=_ 0
 [Stack]
@@ -98,6 +98,9 @@ SumSortOrder=0
 LoggingEnabled=_ 0
 LogFile=_ ""
 Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
 [DriverProfiling]
 Enabled=0
 Mode=3
@@ -108,9 +111,6 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
-[TermIOLog]
-LoggingEnabled=_ 0
-LogFile=_ ""
 [Disassemble mode]
 mode=0
 [Breakpoints2]

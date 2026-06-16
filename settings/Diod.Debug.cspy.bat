@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"D:\common\bin\cspybat" -f "D:\Работа\Программы на IAR для микроконтроллеров\UART1 Modbus RX TX с индикатором\settings\Diod.Debug.general.xcl" --backend -f "D:\Работа\Программы на IAR для микроконтроллеров\UART1 Modbus RX TX с индикатором\settings\Diod.Debug.driver.xcl" 
+"D:\common\bin\cspybat" -f "D:\Работа\Диод\UART1 Modbus RX TX с индикатором и таблицей\settings\Diod.Debug.general.xcl" --backend -f "D:\Работа\Диод\UART1 Modbus RX TX с индикатором и таблицей\settings\Diod.Debug.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"D:\common\bin\cspybat" -f "D:\Работа\Программы на IAR для микроконтроллеров\UART1 Modbus RX TX с индикатором\settings\Diod.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\Работа\Программы на IAR для микроконтроллеров\UART1 Modbus RX TX с индикатором\settings\Diod.Debug.driver.xcl" 
+"D:\common\bin\cspybat" -f "D:\Работа\Диод\UART1 Modbus RX TX с индикатором и таблицей\settings\Diod.Debug.general.xcl" "--debug_file=%~1" --backend -f "D:\Работа\Диод\UART1 Modbus RX TX с индикатором и таблицей\settings\Diod.Debug.driver.xcl" 
 
 @echo off 
 :end
