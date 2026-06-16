@@ -1,0 +1,125 @@
+###############################################################################
+#
+# IAR ELF Linker V7.50.2.10312/W32 for ARM                15/Jul/2025  17:23:02
+# Copyright 2007-2015 IAR Systems AB.
+#
+#    Output file  =  D:\Работа\Диод\UART2\Release\Exe\c.out
+#    Map file     =  D:\Работа\Диод\UART2\Release\List\c.map
+#    Command line =  
+#        D:\Работа\Диод\UART2\Release\Obj\main.o -o
+#        D:\Работа\Диод\UART2\Release\Exe\c.out --redirect _Printf=_PrintfFull
+#        --redirect _Scanf=_ScanfFull --map
+#        D:\Работа\Диод\UART2\Release\List\c.map --config
+#        D:\arm\CONFIG\generic_cortex.icf --entry __iar_program_start --inline
+#        --vfe
+#
+###############################################################################
+
+*******************************************************************************
+*** RUNTIME MODEL ATTRIBUTES
+***
+
+CppFlavor       = *
+__SystemLibrary = DLib
+
+
+*******************************************************************************
+*** PLACEMENT SUMMARY
+***
+
+"A1":  place at 0x00000000 { ro section .intvec };
+"P1":  place in [from 0x00000000 to 0x0007ffff] { ro };
+"P3":  place in [from 0x00000000 to 0x00000000] |
+                [from 0x20000000 to 0x2000ffff] { rw, block CSTACK, block HEAP };
+
+  Section   Kind        Address   Size  Object
+  -------   ----        -------   ----  ------
+"A1":                             0x40
+  .intvec   ro code  0x00000000   0x40  vector_table_M.o [4]
+                   - 0x00000040   0x40
+
+"P1":                            0x264
+  .text     ro code  0x00000040  0x220  main.o [1]
+  .text     ro code  0x00000260   0x1a  cmain.o [4]
+  .text     ro code  0x0000027a    0x4  exit.o [3]
+  .text     ro code  0x0000027e    0x2  vector_table_M.o [4]
+  .text     ro code  0x00000280    0xa  cexit.o [4]
+  .text     ro code  0x0000028c    0xc  XXexit.o [4]
+  .text     ro code  0x00000298    0xc  cstartup_M.o [4]
+                   - 0x000002a4  0x264
+
+"P3":                            0x400
+  CSTACK             0x20000000  0x400  <Block>
+    CSTACK  uninit   0x20000000  0x400  <Block tail>
+                   - 0x20000400  0x400
+
+
+
+*******************************************************************************
+*** MODULE SUMMARY
+***
+
+    Module            ro code  rw data
+    ------            -------  -------
+D:\Работа\Диод\UART2\Release\Obj: [1]
+    main.o                544
+    ----------------------------------
+    Total:                544
+
+command line: [2]
+    ----------------------------------
+    Total:
+
+dl7M_tln.a: [3]
+    exit.o                  4
+    ----------------------------------
+    Total:                  4
+
+rt7M_tl.a: [4]
+    XXexit.o               12
+    cexit.o                10
+    cmain.o                26
+    cstartup_M.o           12
+    vector_table_M.o       66
+    ----------------------------------
+    Total:                126
+
+    Gaps                    2
+    Linker created               1 024
+--------------------------------------
+    Grand Total:          676    1 024
+
+
+*******************************************************************************
+*** ENTRY LIST
+***
+
+Entry                    Address   Size  Type      Object
+-----                    -------   ----  ----      ------
+?main                 0x00000261         Code  Gb  cmain.o [4]
+CSTACK$$Base          0x20000000          --   Gb  - Linker created -
+CSTACK$$Limit         0x20000400          --   Gb  - Linker created -
+Region$$Table$$Base   0x00000000          --   Gb  - Linker created -
+Region$$Table$$Limit  0x00000000          --   Gb  - Linker created -
+SystemInit            0x00000041  0x104  Code  Gb  main.o [1]
+__cmain               0x00000261         Code  Gb  cmain.o [4]
+__exit                0x0000028d         Code  Gb  XXexit.o [4]
+__iar_program_start   0x00000299         Code  Gb  cstartup_M.o [4]
+__vector_table        0x00000000         Data  Gb  vector_table_M.o [4]
+_call_main            0x0000026d         Code  Gb  cmain.o [4]
+_exit                 0x00000281         Code  Gb  cexit.o [4]
+_main                 0x00000277         Code  Gb  cmain.o [4]
+exit                  0x0000027b    0x4  Code  Gb  exit.o [3]
+main                  0x00000145  0x104  Code  Gb  main.o [1]
+
+
+[1] = D:\Работа\Диод\UART2\Release\Obj
+[2] = command line
+[3] = dl7M_tln.a
+[4] = rt7M_tl.a
+
+    676 bytes of readonly  code memory
+  1 024 bytes of readwrite data memory
+
+Errors: none
+Warnings: none
